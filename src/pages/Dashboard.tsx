@@ -1,9 +1,34 @@
-import type { KpiData } from "@/types/kpi.types";
-import kpiData from "@/data/kpi.json";
 import { KpiCard } from "@/components/dashboard/KpiCard";
+import { useQuery } from "@tanstack/react-query";
+import { getKpiData } from "@/services/kpiServices";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
-  const data = kpiData as KpiData[];
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["kpi"],
+    queryFn: async () => getKpiData(),
+  });
+
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return (
+      <Alert variant="destructive" className="w-full text-center">
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>{error.message}</AlertDescription>
+        <Button
+          onClick={() => refetch()}
+          variant="secondary"
+          size="sm"
+          className="mt-3 mx-auto min-w-96"
+        >
+          Retry
+        </Button>
+      </Alert>
+    );
+  }
 
   return (
     <>
