@@ -1,13 +1,13 @@
 [
   {
     "label": "Revenue",
-    "value": "€24,580",
+    "value": "€191.40",
     "change": 4.2,
     "trend": [30, 45, 38, 52, 48, 60]
   },
   {
     "label": "Total Orders",
-    "value": "1,284",
+    "value": "10",
     "change": 2.1,
     "trend": [40, 42, 55, 48, 60, 58]
   },
