@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 type QueryErrorStateProps = {
-    error: Error;
-    refetch: () => void;
-}
+  error: Error;
+  refetch: () => void;
+};
 
-export function QueryErrorState({error, refetch}: QueryErrorStateProps) {
+export function QueryErrorState({ error, refetch }: QueryErrorStateProps) {
   return (
     <>
       <Alert
@@ -19,7 +19,7 @@ export function QueryErrorState({error, refetch}: QueryErrorStateProps) {
           onClick={() => refetch()}
           variant="secondary"
           size="sm"
-          className="mt-3 mx-auto min-w-96"
+          className="mt-3 mx-auto w-full max-w-xs"
         >
           Retry
         </Button>

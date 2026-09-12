@@ -29,7 +29,7 @@ export function SalesChart() {
             Sales Performance
           </span>
         </CardHeader>
-        <CardContent className="h-[300px]">
+        <CardContent className="h-75">
           {error ? (
             <QueryErrorState error={error} refetch={refetch} />
           ) : (
