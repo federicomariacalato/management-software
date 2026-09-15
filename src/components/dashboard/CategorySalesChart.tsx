@@ -11,6 +11,14 @@ import {
   Label,
 } from "recharts";
 
+const CHART_COLORS = [
+  "var(--chart-1)",
+  "var(--chart-2)",
+  "var(--chart-3)",
+  "var(--chart-4)",
+  "var(--chart-5)",
+];
+
 export function CategorySalesChart() {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["category sales"],
@@ -21,6 +29,11 @@ export function CategorySalesChart() {
     return <div>Loading...</div>;
   }
   const totalQuantity = data.reduce((sum, item) => sum + item.quantity, 0);
+
+  const dataWithColors = data.map((item, index) => ({
+    ...item,
+    fill: CHART_COLORS[index % CHART_COLORS.length],
+  }));
   return (
     <>
       <Card>
@@ -36,7 +49,7 @@ export function CategorySalesChart() {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={data}
+                  data={dataWithColors}
                   dataKey="quantity"
                   nameKey="category"
                   innerRadius={60}

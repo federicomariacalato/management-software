@@ -1,22 +1,18 @@
 [
   {
     "category": "Olio EVOO",
-    "quantity": 8,
-    "fill": "#8884d8"
+    "quantity": 8
   },
   {
     "category": "Oli Aromatizzati",
-    "quantity": 3,
-    "fill": "#82ca9d"
+    "quantity": 3
   },
   {
     "category": "Conserve",
-    "quantity": 4,
-    "fill": "#ffc658"
+    "quantity": 4
   },
   {
     "category": "Specialità",
-    "quantity": 2,
-    "fill": "#ff8042"
+    "quantity": 2
   }
 ]
