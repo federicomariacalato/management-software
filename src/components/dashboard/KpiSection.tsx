@@ -9,12 +9,12 @@ export function KpiSection() {
     queryFn: async () => getKpiData(),
   });
 
-  if (isLoading || !data) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
     return <QueryErrorState error={error} refetch={refetch} />;
+  }
+
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
   }
 
   return (

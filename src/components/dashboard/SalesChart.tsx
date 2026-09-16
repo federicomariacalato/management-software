@@ -17,6 +17,10 @@ export function SalesChart() {
     queryFn: async () => getSalesData(),
   });
 
+  if (error) {
+    return <QueryErrorState error={error} refetch={refetch} />;
+  }
+
   if (isLoading || !data) {
     return <div>Loading...</div>;
   }
@@ -30,35 +34,27 @@ export function SalesChart() {
           </span>
         </CardHeader>
         <CardContent className="h-75">
-          {error ? (
-            <QueryErrorState error={error} refetch={refetch} />
-          ) : (
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data}>
-                <XAxis
-                  dataKey="month"
-                  stroke="currentColor"
-                  className="text-xs text-muted-foreground"
-                />
-                <YAxis
-                  stroke="currentColor"
-                  className="text-xs text-muted-foreground"
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "var(--popover)",
-                    border: "1px solid var(--border)",
-                    borderRadius: "8px",
-                  }}
-                />
-                <Bar
-                  dataKey="value"
-                  fill="var(--primary)"
-                  radius={[4, 4, 0, 0]}
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          )}
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={data}>
+              <XAxis
+                dataKey="month"
+                stroke="currentColor"
+                className="text-xs text-muted-foreground"
+              />
+              <YAxis
+                stroke="currentColor"
+                className="text-xs text-muted-foreground"
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "var(--popover)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "8px",
+                }}
+              />
+              <Bar dataKey="value" fill="var(--primary)" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
         </CardContent>
       </Card>
     </>
