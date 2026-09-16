@@ -1,7 +1,7 @@
 import { SalesChart } from "@/components/dashboard/SalesChart";
 import { KpiSection } from "@/components/dashboard/KpiSection";
 import { CategorySalesChart } from "@/components/dashboard/CategorySalesChart";
-import { OrdersTable } from "@/components/dashboard/OrdersTable";
+import { OrdersSection } from "@/components/dashboard/OrdersSection";
 
 export default function Dashboard() {
   return (
@@ -19,7 +19,7 @@ export default function Dashboard() {
             <CategorySalesChart />
           </div>
           <div className="lg:col-span-3">
-            <OrdersTable />
+            <OrdersSection />
           </div>
         </div>
       </div>
