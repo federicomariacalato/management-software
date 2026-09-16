@@ -12,3 +12,5 @@ export function getStatusClassName(status: OrderStatus) {
       return "bg-red-100 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-400 dark:border-red-500/30";
   }
 }
+
+export const ORDER_STATUSES: OrderStatus[] = ["processing", "shipped", "delivered", "cancelled"];
