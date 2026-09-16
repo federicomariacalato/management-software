@@ -1,164 +1,394 @@
 [
   {
-    "id": "#10456",
+    "id": "#10460",
     "customerName": "Marco Ferrari",
     "email": "marco.ferrari@gmail.com",
     "date": "2026-09-11",
     "itemsCount": 3,
-    "totalAmount": 47.5,
-    "orderStatus": "delivered"
+    "totalAmount": 37.5,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 1, "unitPrice": 18.5 },
+      { "productId": 9, "productName": "Miele di Sulla delle Colline Locali", "quantity": 2, "unitPrice": 9.5 }
+    ]
   },
   {
-    "id": "#10455",
+    "id": "#10459",
     "customerName": "Giulia Romano",
     "email": "giulia.romano@outlook.com",
     "date": "2026-09-11",
     "itemsCount": 1,
-    "totalAmount": 18.9,
-    "orderStatus": "delivered"
+    "totalAmount": 18.5,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 1, "unitPrice": 18.5 }
+    ]
   },
   {
-    "id": "#10454",
+    "id": "#10458",
     "customerName": "Luca Bianchi",
     "email": "luca.bianchi@gmail.com",
     "date": "2026-09-10",
     "itemsCount": 2,
-    "totalAmount": 34.0,
-    "orderStatus": "shipped"
+    "totalAmount": 20.3,
+    "orderStatus": "shipped",
+    "items": [
+      { "productId": 5, "productName": "Olio EVOO Aromatizzato al Limone del Gargano", "quantity": 1, "unitPrice": 12.5 },
+      { "productId": 7, "productName": "Pomodori Secchi Artigianali in Olio EVOO", "quantity": 1, "unitPrice": 7.8 }
+    ]
   },
   {
-    "id": "#10453",
+    "id": "#10457",
     "customerName": "Sara Colombo",
     "email": "sara.colombo@libero.it",
     "date": "2026-09-10",
     "itemsCount": 4,
-    "totalAmount": 62.3,
-    "orderStatus": "delivered"
-  },
-  {
-    "id": "#10452",
-    "customerName": "Andrea Esposito",
-    "email": "andrea.esposito@yahoo.it",
-    "date": "2026-09-09",
-    "itemsCount": 1,
-    "totalAmount": 15.0,
-    "orderStatus": "cancelled"
-  },
-  {
-    "id": "#10451",
-    "customerName": "Chiara Ricci",
-    "email": "chiara.ricci@gmail.com",
-    "date": "2026-09-09",
-    "itemsCount": 2,
-    "totalAmount": 29.8,
-    "orderStatus": "processing"
+    "totalAmount": 39.2,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 2, "productName": "Olio EVOO Biologico - Blend Frantoio", "quantity": 1, "unitPrice": 22.0 },
+      { "productId": 3, "productName": "Paté di Olive Nere Leccine", "quantity": 2, "unitPrice": 6.5 },
+      { "productId": 10, "productName": "Tarallini Artigianali Scaldati all'Olio EVOO", "quantity": 1, "unitPrice": 4.2 }
+    ]
   },
   {
     "id": "#10456",
-    "customerName": "Marco Ferrari",
-    "email": "marco.ferrari@gmail.com",
-    "date": "2026-09-11",
-    "itemsCount": 3,
-    "totalAmount": 47.5,
-    "orderStatus": "delivered"
-  },
-  {
-    "id": "#10455",
-    "customerName": "Giulia Romano",
-    "email": "giulia.romano@outlook.com",
-    "date": "2026-09-11",
-    "itemsCount": 1,
-    "totalAmount": 18.9,
-    "orderStatus": "delivered"
-  },
-  {
-    "id": "#10454",
-    "customerName": "Luca Bianchi",
-    "email": "luca.bianchi@gmail.com",
-    "date": "2026-09-10",
-    "itemsCount": 2,
-    "totalAmount": 34.0,
-    "orderStatus": "shipped"
-  },
-  {
-    "id": "#10453",
-    "customerName": "Sara Colombo",
-    "email": "sara.colombo@libero.it",
-    "date": "2026-09-10",
-    "itemsCount": 4,
-    "totalAmount": 62.3,
-    "orderStatus": "delivered"
-  },
-  {
-    "id": "#10452",
     "customerName": "Andrea Esposito",
     "email": "andrea.esposito@yahoo.it",
     "date": "2026-09-09",
     "itemsCount": 1,
-    "totalAmount": 15.0,
-    "orderStatus": "cancelled"
-  },
-  {
-    "id": "#10451",
-    "customerName": "Chiara Ricci",
-    "email": "chiara.ricci@gmail.com",
-    "date": "2026-09-09",
-    "itemsCount": 2,
-    "totalAmount": 29.8,
-    "orderStatus": "processing"
-  },
-  {
-    "id": "#10456",
-    "customerName": "Marco Ferrari",
-    "email": "marco.ferrari@gmail.com",
-    "date": "2026-09-11",
-    "itemsCount": 3,
-    "totalAmount": 47.5,
-    "orderStatus": "delivered"
+    "totalAmount": 6.5,
+    "orderStatus": "cancelled",
+    "items": [
+      { "productId": 3, "productName": "Paté di Olive Nere Leccine", "quantity": 1, "unitPrice": 6.5 }
+    ]
   },
   {
     "id": "#10455",
-    "customerName": "Giulia Romano",
-    "email": "giulia.romano@outlook.com",
-    "date": "2026-09-11",
-    "itemsCount": 1,
-    "totalAmount": 18.9,
-    "orderStatus": "delivered"
-  },
-  {
-    "id": "#10454",
-    "customerName": "Luca Bianchi",
-    "email": "luca.bianchi@gmail.com",
-    "date": "2026-09-10",
-    "itemsCount": 2,
-    "totalAmount": 34.0,
-    "orderStatus": "shipped"
-  },
-  {
-    "id": "#10453",
-    "customerName": "Sara Colombo",
-    "email": "sara.colombo@libero.it",
-    "date": "2026-09-10",
-    "itemsCount": 4,
-    "totalAmount": 62.3,
-    "orderStatus": "delivered"
-  },
-  {
-    "id": "#10452",
-    "customerName": "Andrea Esposito",
-    "email": "andrea.esposito@yahoo.it",
-    "date": "2026-09-09",
-    "itemsCount": 1,
-    "totalAmount": 15.0,
-    "orderStatus": "cancelled"
-  },
-  {
-    "id": "#10451",
     "customerName": "Chiara Ricci",
     "email": "chiara.ricci@gmail.com",
     "date": "2026-09-09",
     "itemsCount": 2,
-    "totalAmount": 29.8,
-    "orderStatus": "processing"
+    "totalAmount": 18.4,
+    "orderStatus": "processing",
+    "items": [
+      { "productId": 8, "productName": "Carciofini Interi Spaccati alla Brace", "quantity": 1, "unitPrice": 8.9 },
+      { "productId": 9, "productName": "Miele di Sulla delle Colline Locali", "quantity": 1, "unitPrice": 9.5 }
+    ]
+  },
+  {
+    "id": "#10454",
+    "customerName": "Davide Russo",
+    "email": "davide.russo@hotmail.it",
+    "date": "2026-09-08",
+    "itemsCount": 5,
+    "totalAmount": 56.8,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 2, "unitPrice": 18.5 },
+      { "productId": 7, "productName": "Pomodori Secchi Artigianali in Olio EVOO", "quantity": 2, "unitPrice": 7.8 },
+      { "productId": 10, "productName": "Tarallini Artigianali Scaldati all'Olio EVOO", "quantity": 1, "unitPrice": 4.2 }
+    ]
+  },
+  {
+    "id": "#10453",
+    "customerName": "Francesca Conti",
+    "email": "francesca.conti@gmail.com",
+    "date": "2026-09-08",
+    "itemsCount": 1,
+    "totalAmount": 4.2,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 10, "productName": "Tarallini Artigianali Scaldati all'Olio EVOO", "quantity": 1, "unitPrice": 4.2 }
+    ]
+  },
+  {
+    "id": "#10452",
+    "customerName": "Matteo Greco",
+    "email": "matteo.greco@alice.it",
+    "date": "2026-09-07",
+    "itemsCount": 3,
+    "totalAmount": 38.7,
+    "orderStatus": "shipped",
+    "items": [
+      { "productId": 2, "productName": "Olio EVOO Biologico - Blend Frantoio", "quantity": 1, "unitPrice": 22.0 },
+      { "productId": 5, "productName": "Olio EVOO Aromatizzato al Limone del Gargano", "quantity": 1, "unitPrice": 12.5 },
+      { "productId": 10, "productName": "Tarallini Artigianali Scaldati all'Olio EVOO", "quantity": 1, "unitPrice": 4.2 }
+    ]
+  },
+  {
+    "id": "#10451",
+    "customerName": "Elena Bruno",
+    "email": "elena.bruno@outlook.com",
+    "date": "2026-09-07",
+    "itemsCount": 2,
+    "totalAmount": 27.4,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 1, "unitPrice": 18.5 },
+      { "productId": 8, "productName": "Carciofini Interi Spaccati alla Brace", "quantity": 1, "unitPrice": 8.9 }
+    ]
+  },
+  {
+    "id": "#10450",
+    "customerName": "Alessandro Villa",
+    "email": "alessandro.villa@gmail.com",
+    "date": "2026-09-06",
+    "itemsCount": 6,
+    "totalAmount": 76.0,
+    "orderStatus": "processing",
+    "items": [
+      { "productId": 2, "productName": "Olio EVOO Biologico - Blend Frantoio", "quantity": 2, "unitPrice": 22.0 },
+      { "productId": 3, "productName": "Paté di Olive Nere Leccine", "quantity": 2, "unitPrice": 6.5 },
+      { "productId": 9, "productName": "Miele di Sulla delle Colline Locali", "quantity": 2, "unitPrice": 9.5 }
+    ]
+  },
+  {
+    "id": "#10449",
+    "customerName": "Valentina Marino",
+    "email": "valentina.marino@libero.it",
+    "date": "2026-09-06",
+    "itemsCount": 1,
+    "totalAmount": 9.5,
+    "orderStatus": "cancelled",
+    "items": [
+      { "productId": 9, "productName": "Miele di Sulla delle Colline Locali", "quantity": 1, "unitPrice": 9.5 }
+    ]
+  },
+  {
+    "id": "#10448",
+    "customerName": "Simone Gallo",
+    "email": "simone.gallo@yahoo.it",
+    "date": "2026-09-05",
+    "itemsCount": 3,
+    "totalAmount": 38.8,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 1, "unitPrice": 18.5 },
+      { "productId": 6, "productName": "Olio EVOO Aromatizzato al Peperoncino Piccante", "quantity": 1, "unitPrice": 12.5 },
+      { "productId": 7, "productName": "Pomodori Secchi Artigianali in Olio EVOO", "quantity": 1, "unitPrice": 7.8 }
+    ]
+  },
+  {
+    "id": "#10447",
+    "customerName": "Martina De Luca",
+    "email": "martina.deluca@gmail.com",
+    "date": "2026-09-05",
+    "itemsCount": 2,
+    "totalAmount": 25.0,
+    "orderStatus": "shipped",
+    "items": [
+      { "productId": 5, "productName": "Olio EVOO Aromatizzato al Limone del Gargano", "quantity": 2, "unitPrice": 12.5 }
+    ]
+  },
+  {
+    "id": "#10446",
+    "customerName": "Riccardo Costa",
+    "email": "riccardo.costa@hotmail.it",
+    "date": "2026-09-04",
+    "itemsCount": 4,
+    "totalAmount": 53.5,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 2, "productName": "Olio EVOO Biologico - Blend Frantoio", "quantity": 1, "unitPrice": 22.0 },
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 1, "unitPrice": 18.5 },
+      { "productId": 3, "productName": "Paté di Olive Nere Leccine", "quantity": 2, "unitPrice": 6.5 }
+    ]
+  },
+  {
+    "id": "#10445",
+    "customerName": "Federica Rizzo",
+    "email": "federica.rizzo@outlook.com",
+    "date": "2026-09-04",
+    "itemsCount": 1,
+    "totalAmount": 8.9,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 8, "productName": "Carciofini Interi Spaccati alla Brace", "quantity": 1, "unitPrice": 8.9 }
+    ]
+  },
+  {
+    "id": "#10444",
+    "customerName": "Stefano Moretti",
+    "email": "stefano.moretti@gmail.com",
+    "date": "2026-09-03",
+    "itemsCount": 2,
+    "totalAmount": 12.0,
+    "orderStatus": "processing",
+    "items": [
+      { "productId": 7, "productName": "Pomodori Secchi Artigianali in Olio EVOO", "quantity": 1, "unitPrice": 7.8 },
+      { "productId": 10, "productName": "Tarallini Artigianali Scaldati all'Olio EVOO", "quantity": 1, "unitPrice": 4.2 }
+    ]
+  },
+  {
+    "id": "#10443",
+    "customerName": "Alessia Barbieri",
+    "email": "alessia.barbieri@libero.it",
+    "date": "2026-09-03",
+    "itemsCount": 5,
+    "totalAmount": 78.0,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 2, "unitPrice": 18.5 },
+      { "productId": 2, "productName": "Olio EVOO Biologico - Blend Frantoio", "quantity": 1, "unitPrice": 22.0 },
+      { "productId": 9, "productName": "Miele di Sulla delle Colline Locali", "quantity": 2, "unitPrice": 9.5 }
+    ]
+  },
+  {
+    "id": "#10442",
+    "customerName": "Lorenzo Fontana",
+    "email": "lorenzo.fontana@gmail.com",
+    "date": "2026-09-02",
+    "itemsCount": 1,
+    "totalAmount": 6.5,
+    "orderStatus": "cancelled",
+    "items": [
+      { "productId": 3, "productName": "Paté di Olive Nere Leccine", "quantity": 1, "unitPrice": 6.5 }
+    ]
+  },
+  {
+    "id": "#10441",
+    "customerName": "Silvia Santoro",
+    "email": "silvia.santoro@yahoo.it",
+    "date": "2026-09-02",
+    "itemsCount": 3,
+    "totalAmount": 32.8,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 5, "productName": "Olio EVOO Aromatizzato al Limone del Gargano", "quantity": 1, "unitPrice": 12.5 },
+      { "productId": 6, "productName": "Olio EVOO Aromatizzato al Peperoncino Piccante", "quantity": 1, "unitPrice": 12.5 },
+      { "productId": 7, "productName": "Pomodori Secchi Artigianali in Olio EVOO", "quantity": 1, "unitPrice": 7.8 }
+    ]
+  },
+  {
+    "id": "#10440",
+    "customerName": "Giacomo Mancini",
+    "email": "giacomo.mancini@gmail.com",
+    "date": "2026-09-01",
+    "itemsCount": 2,
+    "totalAmount": 22.7,
+    "orderStatus": "shipped",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 1, "unitPrice": 18.5 },
+      { "productId": 10, "productName": "Tarallini Artigianali Scaldati all'Olio EVOO", "quantity": 1, "unitPrice": 4.2 }
+    ]
+  },
+  {
+    "id": "#10439",
+    "customerName": "Laura Longo",
+    "email": "laura.longo@outlook.com",
+    "date": "2026-09-01",
+    "itemsCount": 4,
+    "totalAmount": 49.9,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 2, "productName": "Olio EVOO Biologico - Blend Frantoio", "quantity": 1, "unitPrice": 22.0 },
+      { "productId": 8, "productName": "Carciofini Interi Spaccati alla Brace", "quantity": 1, "unitPrice": 8.9 },
+      { "productId": 9, "productName": "Miele di Sulla delle Colline Locali", "quantity": 2, "unitPrice": 9.5 }
+    ]
+  },
+  {
+    "id": "#10438",
+    "customerName": "Filippo Rinaldi",
+    "email": "filippo.rinaldi@gmail.com",
+    "date": "2026-08-31",
+    "itemsCount": 1,
+    "totalAmount": 4.2,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 10, "productName": "Tarallini Artigianali Scaldati all'Olio EVOO", "quantity": 1, "unitPrice": 4.2 }
+    ]
+  },
+  {
+    "id": "#10437",
+    "customerName": "Noemi Caruso",
+    "email": "noemi.caruso@libero.it",
+    "date": "2026-08-31",
+    "itemsCount": 2,
+    "totalAmount": 14.3,
+    "orderStatus": "processing",
+    "items": [
+      { "productId": 3, "productName": "Paté di Olive Nere Leccine", "quantity": 1, "unitPrice": 6.5 },
+      { "productId": 7, "productName": "Pomodori Secchi Artigianali in Olio EVOO", "quantity": 1, "unitPrice": 7.8 }
+    ]
+  },
+  {
+    "id": "#10436",
+    "customerName": "Tommaso Ferri",
+    "email": "tommaso.ferri@hotmail.it",
+    "date": "2026-08-30",
+    "itemsCount": 6,
+    "totalAmount": 106.0,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 2, "unitPrice": 18.5 },
+      { "productId": 2, "productName": "Olio EVOO Biologico - Blend Frantoio", "quantity": 2, "unitPrice": 22.0 },
+      { "productId": 5, "productName": "Olio EVOO Aromatizzato al Limone del Gargano", "quantity": 2, "unitPrice": 12.5 }
+    ]
+  },
+  {
+    "id": "#10435",
+    "customerName": "Beatrice Sartori",
+    "email": "beatrice.sartori@gmail.com",
+    "date": "2026-08-30",
+    "itemsCount": 1,
+    "totalAmount": 9.5,
+    "orderStatus": "cancelled",
+    "items": [
+      { "productId": 9, "productName": "Miele di Sulla delle Colline Locali", "quantity": 1, "unitPrice": 9.5 }
+    ]
+  },
+  {
+    "id": "#10434",
+    "customerName": "Nicola Testa",
+    "email": "nicola.testa@yahoo.it",
+    "date": "2026-08-29",
+    "itemsCount": 3,
+    "totalAmount": 25.6,
+    "orderStatus": "shipped",
+    "items": [
+      { "productId": 6, "productName": "Olio EVOO Aromatizzato al Peperoncino Piccante", "quantity": 1, "unitPrice": 12.5 },
+      { "productId": 8, "productName": "Carciofini Interi Spaccati alla Brace", "quantity": 1, "unitPrice": 8.9 },
+      { "productId": 10, "productName": "Tarallini Artigianali Scaldati all'Olio EVOO", "quantity": 1, "unitPrice": 4.2 }
+    ]
+  },
+  {
+    "id": "#10433",
+    "customerName": "Camilla Vitale",
+    "email": "camilla.vitale@outlook.com",
+    "date": "2026-08-29",
+    "itemsCount": 2,
+    "totalAmount": 25.0,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 1, "unitPrice": 18.5 },
+      { "productId": 3, "productName": "Paté di Olive Nere Leccine", "quantity": 1, "unitPrice": 6.5 }
+    ]
+  },
+  {
+    "id": "#10432",
+    "customerName": "Gabriele Serra",
+    "email": "gabriele.serra@gmail.com",
+    "date": "2026-08-28",
+    "itemsCount": 4,
+    "totalAmount": 53.5,
+    "orderStatus": "delivered",
+    "items": [
+      { "productId": 2, "productName": "Olio EVOO Biologico - Blend Frantoio", "quantity": 1, "unitPrice": 22.0 },
+      { "productId": 5, "productName": "Olio EVOO Aromatizzato al Limone del Gargano", "quantity": 1, "unitPrice": 12.5 },
+      { "productId": 9, "productName": "Miele di Sulla delle Colline Locali", "quantity": 2, "unitPrice": 9.5 }
+    ]
+  },
+  {
+    "id": "#10431",
+    "customerName": "Ilaria Pellegrini",
+    "email": "ilaria.pellegrini@libero.it",
+    "date": "2026-08-28",
+    "itemsCount": 1,
+    "totalAmount": 18.5,
+    "orderStatus": "processing",
+    "items": [
+      { "productId": 1, "productName": "Olio Extra Vergine di Oliva - Monocultivar", "quantity": 1, "unitPrice": 18.5 }
+    ]
   }
 ]
