@@ -4,6 +4,8 @@ A React + TypeScript admin dashboard for managing an ecommerce store — orders,
 
 Built as a portfolio project to practice frontend architecture, state management, and data visualization with a modern React stack.
 
+**Live demo:** [management-software-three.vercel.app](https://management-software-three.vercel.app)
+
 ## Features
 
 **Dashboard**
