@@ -1,75 +1,58 @@
-# React + TypeScript + Vite
+# Management Software
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript admin dashboard for managing an ecommerce store — orders, sales analytics, and (soon) customers and products.
 
-Currently, two official plugins are available:
+Built as a portfolio project to practice frontend architecture, state management, and data visualization with a modern React stack.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+**Dashboard**
+- KPI cards with sparkline trends
+- Sales performance bar chart and category breakdown donut chart
+- Recent orders widget
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Orders**
+- Full order list with status badges and formatted currency
+- Filter by status, search by customer/email, and filter by date range
+- Order detail side panel with line items and totals
 
-## Expanding the ESLint configuration
+## Tech stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)
+- [Vite](https://vite.dev)
+- [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
+- [TanStack Query](https://tanstack.com/query) for data fetching and caching
+- [React Router](https://reactrouter.com)
+- [Recharts](https://recharts.org) for charts
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+The app runs at `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Data is currently served from local mock JSON — no backend required to run it.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Roadmap
 
+- [ ] Customers page (aggregated from order data)
+- [ ] Products page
+- [ ] Connect to a real backend, shared with a companion ecommerce storefront project
+
+## Project structure
+
+```
+src/
+├── components/
+│   ├── dashboard/   # Dashboard-specific widgets
+│   ├── orders/       # Orders domain components (table, filters, row detail)
+│   ├── layout/        # Sidebar, header
+│   └── ui/              # shadcn/ui primitives
+├── pages/            # Route-level pages
+├── services/         # Data-fetching layer (mock services for now)
+├── types/             # Shared TypeScript types
+└── utils/             # Formatting and status helpers
 ```
