@@ -78,7 +78,11 @@ export default function Customers() {
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6 min-w-0">
         <h1 className="text-2xl font-bold">Customers</h1>
         <div className="flex flex-wrap items-center gap-3 min-w-0">
+          <label htmlFor="customer-search" className="sr-only">
+            Search customers by name or email
+          </label>
           <Input
+            id="customer-search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search customer or email..."
@@ -88,7 +92,7 @@ export default function Customers() {
             value={sortBy}
             onValueChange={(value) => setSortBy(value ?? "total spent")}
           >
-            <SelectTrigger>
+            <SelectTrigger aria-label="Sort customers">
               <SelectValue placeholder="Sort Filter" />
             </SelectTrigger>
             <SelectContent>
@@ -175,8 +179,9 @@ export default function Customers() {
                         variant: "secondary",
                         size: "icon",
                       })}
+                      aria-label={`View order history for ${customer.customerName}`}
                     >
-                      <Eye />
+                      <Eye aria-hidden="true" />
                     </SheetTrigger>
                     <SheetContent>
                       <SheetHeader>

@@ -11,9 +11,20 @@ function getYearMonth(dateStr: string): { year: number; month: number } {
   return { year, month: month - 1 };
 }
 
+function yearMonthKey(year: number, month: number): number {
+  return year * 12 + month;
+}
+
 export function buildSalesData(orders: OrderData[]): SalesData[] {
-  const validOrders = orders.filter((order) => order.orderStatus !== "cancelled");
   const now = new Date();
+
+  const totalsByMonth = new Map<number, number>();
+  for (const order of orders) {
+    if (order.orderStatus === "cancelled") continue;
+    const { year, month } = getYearMonth(order.date);
+    const key = yearMonthKey(year, month);
+    totalsByMonth.set(key, (totalsByMonth.get(key) ?? 0) + order.totalAmount);
+  }
 
   const months: SalesData[] = [];
   for (let i = 11; i >= 0; i--) {
@@ -21,14 +32,10 @@ export function buildSalesData(orders: OrderData[]): SalesData[] {
     const year = monthDate.getFullYear();
     const month = monthDate.getMonth();
 
-    const total = validOrders
-      .filter((order) => {
-        const orderYearMonth = getYearMonth(order.date);
-        return orderYearMonth.year === year && orderYearMonth.month === month;
-      })
-      .reduce((sum, order) => sum + order.totalAmount, 0);
-
-    months.push({ month: MONTH_LABELS[month], value: Math.round(total) });
+    months.push({
+      month: MONTH_LABELS[month],
+      value: Math.round(totalsByMonth.get(yearMonthKey(year, month)) ?? 0),
+    });
   }
 
   return months;
