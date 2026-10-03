@@ -19,6 +19,32 @@ const CHART_COLORS = [
   "var(--chart-5)",
 ];
 
+import type { LabelProps } from "recharts";
+
+function CenteredTotalLabel({
+  viewBox,
+  total,
+}: LabelProps & { total: number }) {
+  if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) return null;
+  const { cx, cy } = viewBox;
+  if (cx === undefined || cy === undefined) return null;
+
+  return (
+    <text x={cx} y={cy} textAnchor="middle">
+      <tspan x={cx} dy="-0.5em" className="text-xs fill-muted-foreground">
+        Total Sales
+      </tspan>
+      <tspan
+        x={cx}
+        dy="1.5em"
+        className="text-xl font-bold fill-foreground"
+      >
+        {total}
+      </tspan>
+    </text>
+  );
+}
+
 export function CategorySalesChart() {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["category sales"],
@@ -57,27 +83,9 @@ export function CategorySalesChart() {
                 outerRadius={100}
               >
                 <Label
-                  content={({ viewBox }: any) => {
-                    const { cx, cy } = viewBox;
-                    return (
-                      <text x={cx} y={cy} textAnchor="middle">
-                        <tspan
-                          x={cx}
-                          dy="-0.5em"
-                          className="text-xs fill-muted-foreground"
-                        >
-                          Total Sales
-                        </tspan>
-                        <tspan
-                          x={cx}
-                          dy="1.5em"
-                          className="text-xl font-bold fill-foreground"
-                        >
-                          {totalQuantity}
-                        </tspan>
-                      </text>
-                    );
-                  }}
+                  content={
+                    <CenteredTotalLabel total={totalQuantity} />
+                  }
                 />
               </Pie>
               <Tooltip />
