@@ -19,4 +19,15 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // shadcn primitives intentionally co-locate a component with its
+    // `cva` variant helper (`buttonVariants`, `badgeVariants`, ...) and are
+    // overwritten wholesale by `shadcn add`. Restructuring them to satisfy
+    // this rule would be undone on the next regeneration, so exempt the
+    // vendored directory rather than fight it.
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])

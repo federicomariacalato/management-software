@@ -32,8 +32,9 @@ export function OrderTableRow({ order, variant }: OrderTableRowProps) {
           <Sheet>
             <SheetTrigger
               className={buttonVariants({ variant: "secondary", size: "icon" })}
+              aria-label={`View details for order ${order.id}`}
             >
-              <Eye />
+              <Eye aria-hidden="true" />
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>

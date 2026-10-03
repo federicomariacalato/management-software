@@ -1,6 +1,7 @@
 import type { OrderData } from "@/types/order.types";
-import type { KpiData } from "@/types/kpi.types";
+import type { KpiData, KpiResult } from "@/types/kpi.types";
 import { formatCurrency } from "./currency";
+import { percentChange } from "./percentChange";
 
 function toUTCDays(dateStr: string): number {
   const [year, month, day] = dateStr.split("-").map(Number);
@@ -28,19 +29,15 @@ function periodStats(
   return { revenue, count, avgOrderValue: count > 0 ? revenue / count : 0 };
 }
 
-function percentChange(current: number, previous: number): number {
-  if (previous === 0) return 0;
-  return Math.round(((current - previous) / previous) * 1000) / 10;
-}
-
 export function buildKpiData(orders: OrderData[]): KpiData[] {
   const validOrders = orders.filter((order) => order.orderStatus !== "cancelled");
   const now = new Date();
-  const todayUTCDays = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / (1000 * 60 * 60 * 24);
+  const todayUTCDays =
+    Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) /
+    (1000 * 60 * 60 * 24);
 
   const current = periodStats(validOrders, todayUTCDays, 0, 30);
   const previous = periodStats(validOrders, todayUTCDays, 30, 60);
-
   const weeklyTrend = (metric: keyof PeriodStats) => {
     const weeks: number[] = [];
     for (let week = 5; week >= 0; week--) {
@@ -72,8 +69,30 @@ export function buildKpiData(orders: OrderData[]): KpiData[] {
     {
       label: "Conversion Rate (30d)",
       value: "3,2%",
-      change: 0.6,
+      change: percentChange(3.2, 3.2),
       trend: [3.0, 3.1, 2.9, 3.2, 3.1, 3.2],
     },
   ];
 }
+
+/**
+ * Builds the KPI payload together with an explicit signal for the case where
+ * the rolling 30-day window is completely empty. Without it the dashboard
+ * renders four confident zeros (EUR 0, 0 orders, +0%) with no indication that
+ * the data simply has nothing recent in it.
+ */
+export function buildKpiResult(orders: OrderData[]): KpiResult {
+  const validOrders = orders.filter((order) => order.orderStatus !== "cancelled");
+  const now = new Date();
+  const todayUTCDays =
+    Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) /
+    (1000 * 60 * 60 * 24);
+
+  const current = periodStats(validOrders, todayUTCDays, 0, 30);
+
+  return {
+    kpis: buildKpiData(orders),
+    hasSalesInPeriod: current.count > 0,
+  };
+}
+
