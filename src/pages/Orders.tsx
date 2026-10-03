@@ -6,6 +6,7 @@ import { OrdersFilters } from "@/components/orders/OrdersFilters";
 import type { OrderStatus } from "@/types/order.types";
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
+import { filterOrders } from "@/utils/orders";
 
 export default function Orders() {
   const [statusFilter, setStatusFilter] = useState<OrderStatus | "all">("all");
@@ -23,16 +24,11 @@ export default function Orders() {
   if (isLoading || !data) {
     return <div>Loading...</div>;
   }
-  const filteredOrders = data.filter(
-    (order) =>
-      (statusFilter === "all" || order.orderStatus === statusFilter) &&
-      (searchTerm === "" ||
-        order.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      (!dateRange?.from ||
-        (new Date(order.date) >= dateRange.from &&
-          (!dateRange.to || new Date(order.date) <= dateRange.to))),
-  );
+  const filteredOrders = filterOrders(data, {
+    status: statusFilter,
+    search: searchTerm,
+    dateRange,
+  });
 
   return (
     <>
