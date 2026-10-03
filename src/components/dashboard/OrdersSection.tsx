@@ -21,7 +21,7 @@ export function OrdersSection() {
   return (
     <>
       <Card>
-        <CardHeader>
+        <CardHeader className="flex flex-row items-center justify-between">
           <span className="text-sm font-medium text-muted-foreground">
             Recent Orders
           </span>

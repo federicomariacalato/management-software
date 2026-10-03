@@ -50,7 +50,11 @@ export function OrdersFilters({
           ))}
         </SelectContent>
       </Select>
+      <label htmlFor="order-search" className="sr-only">
+        Search orders by customer, email or order id
+      </label>
       <Input
+        id="order-search"
         value={search}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder="Search customer or email..."
@@ -62,8 +66,9 @@ export function OrdersFilters({
             buttonVariants({ variant: "outline", size: "icon" }),
             "border-input",
           )}
+          aria-label="Filter orders by date range"
         >
-          <CalendarArrowDown />
+          <CalendarArrowDown aria-hidden="true" />
         </PopoverTrigger>
         <PopoverContent>
           <Calendar
