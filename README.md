@@ -46,6 +46,10 @@ The app runs at `http://localhost:5173`.
 
 Data is served from local mock JSON — dashboard metrics and customer summaries are derived from it at runtime rather than pre-computed, so they stay consistent with the current date and with each other.
 
+## Backend
+
+The dashboard is being connected to the same Supabase project as the companion [Terre d'Oliva storefront](https://github.com/federicomariacalato/terre-doliva-ecommerce), so both apps share one database: orders placed in the store show up here. The database schema lives in the storefront repository, as the single source of truth (see [`supabase/README.md`](supabase/README.md)).
+
 ## Roadmap
 
 - [ ] Products page
