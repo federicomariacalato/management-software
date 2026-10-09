@@ -1,6 +1,8 @@
-import categorySalesData from "@/data/category-sales.json";
 import type { CategorySalesData } from "@/types/category-sales.types";
+import { buildCategorySalesData } from "@/utils/categorySales";
+import { getOrderData } from "./orderServices";
 
 export async function getCategorySalesData(): Promise<CategorySalesData[]> {
-  return categorySalesData as CategorySalesData[];
+  const orders = await getOrderData();
+  return buildCategorySalesData(orders);
 }

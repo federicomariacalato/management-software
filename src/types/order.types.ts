@@ -5,6 +5,7 @@ export type OrderItem = {
   productName: string;
   quantity: number;
   unitPrice: number;
+  category: string;
 };
 
 export type OrderData = {
