@@ -13,6 +13,7 @@ import {
   SheetDescription,
 } from "../ui/sheet";
 import { buttonVariants } from "../ui/button";
+import { formatOrderId } from "@/utils/orderId";
 
 type OrderTableRowProps = {
   order: OrderData;
@@ -23,7 +24,7 @@ export function OrderTableRow({ order, variant }: OrderTableRowProps) {
   return (
     <TableRow>
       <TableCell>{order.customerName}</TableCell>
-      <TableCell>{order.id}</TableCell>
+      <TableCell>{formatOrderId(order.id)}</TableCell>
       <TableCell>{order.email}</TableCell>
       <TableCell>{order.date}</TableCell>
       <TableCell className="text-right">{order.itemsCount}</TableCell>
@@ -37,7 +38,7 @@ export function OrderTableRow({ order, variant }: OrderTableRowProps) {
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
-                <SheetTitle>Order {order.id}</SheetTitle>
+                <SheetTitle>Order {formatOrderId(order.id)}</SheetTitle>
                 <SheetDescription>
                   {order.customerName} · {order.date}
                 </SheetDescription>
