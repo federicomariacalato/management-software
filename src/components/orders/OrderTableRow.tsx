@@ -1,9 +1,9 @@
-import type { OrderData } from "@/types/order.types";
+import type { OrderData, OrderStatus } from "@/types/order.types";
 import { TableRow, TableCell } from "../ui/table";
 import { Badge } from "../ui/badge";
 import { formatCurrency } from "@/utils/currency";
-import { getStatusClassName } from "@/utils/orderStatus";
-import { Eye } from "lucide-react";
+import { getStatusClassName, ORDER_STATUSES } from "@/utils/orderStatus";
+import { Eye, WifiOff } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -14,6 +14,16 @@ import {
 } from "../ui/sheet";
 import { buttonVariants } from "../ui/button";
 import { formatOrderId } from "@/utils/orderId";
+import { Label } from "../ui/label";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateOrderStatus } from "@/services/orderServices";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 type OrderTableRowProps = {
   order: OrderData;
@@ -21,6 +31,15 @@ type OrderTableRowProps = {
 };
 
 export function OrderTableRow({ order, variant }: OrderTableRowProps) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (newStatus: OrderStatus) =>
+      updateOrderStatus(order.id, newStatus),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+  });
+
   return (
     <TableRow>
       <TableCell>{order.customerName}</TableCell>
@@ -43,6 +62,44 @@ export function OrderTableRow({ order, variant }: OrderTableRowProps) {
                   {order.customerName} · {order.date}
                 </SheetDescription>
               </SheetHeader>
+              <div className="flex flex-col gap-2 px-4">
+                <Label htmlFor={`status-${order.id}`}>Status</Label>
+                <Select
+                  value={order.orderStatus}
+                  onValueChange={(status) => {
+                    if (status) mutation.mutate(status);
+                  }}
+                  disabled={mutation.isPending}
+                >
+                  <SelectTrigger id={`status-${order.id}`} className="w-full">
+                    <SelectValue placeholder="Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ORDER_STATUSES.map((s) => (
+                      <SelectItem key={s} value={s}>
+                        {s}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {mutation.isPending && !mutation.isPaused && (
+                  <span className="text-xs text-muted-foreground">
+                    Saving...
+                  </span>
+                )}
+                {mutation.isPending && mutation.isPaused && (
+                  <span className="flex items-center gap-1.5 text-xs text-amber-600 dark:text-amber-400">
+                    <WifiOff className="h-3.5 w-3.5 shrink-0" />
+                    You’re offline. The change will be saved when you’re back
+                    online.
+                  </span>
+                )}
+                {mutation.isError && (
+                  <span className="text-xs text-destructive">
+                    {mutation.error.message}
+                  </span>
+                )}
+              </div>
               <div className="flex flex-col gap-2 px-4">
                 {order.items.map((o) => (
                   <div

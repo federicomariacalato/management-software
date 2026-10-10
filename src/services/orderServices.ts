@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
-import type { OrderData } from "@/types/order.types";
+import type { OrderData, OrderStatus } from "@/types/order.types";
 import { format } from "date-fns";
 
 export async function getOrderData(): Promise<OrderData[]> {
@@ -34,4 +34,23 @@ export async function getOrderData(): Promise<OrderData[]> {
   }));
 
   return orderData;
+}
+
+export async function updateOrderStatus(
+  orderId: string,
+  newStatus: OrderStatus,
+): Promise<void> {
+  const { data, error } = await supabase
+    .from("orders")
+    .update({ status: newStatus })
+    .eq("id", orderId)
+    .select();
+
+  if (error) {
+    throw new Error("Si è verificato un errore nella modifica dello stato");
+  }
+
+  if (data.length === 0) {
+    throw new Error("Ordine non trovato o permessi insufficienti");
+  }
 }
