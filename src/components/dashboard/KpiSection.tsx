@@ -5,7 +5,7 @@ import { QueryErrorState } from "./QueryErrorState";
 
 export function KpiSection() {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["kpi"],
+    queryKey: ["orders", "kpi"],
     queryFn: async () => getKpiData(),
   });
 

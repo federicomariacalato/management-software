@@ -13,7 +13,7 @@ import { QueryErrorState } from "./QueryErrorState";
 
 export function SalesChart() {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["sales"],
+    queryKey: ["orders", "sales"],
     queryFn: async () => getSalesData(),
   });
 
@@ -52,7 +52,11 @@ export function SalesChart() {
                   borderRadius: "8px",
                 }}
               />
-              <Bar dataKey="value" fill="var(--primary)" radius={[4, 4, 0, 0]} />
+              <Bar
+                dataKey="value"
+                fill="var(--primary)"
+                radius={[4, 4, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>

@@ -41,7 +41,7 @@ export default function Customers() {
     "total spent" | "orders count" | "last order date"
   >("total spent");
   const { data, error, isLoading, refetch } = useQuery({
-    queryKey: ["customer"],
+    queryKey: ["orders", "customers"],
     queryFn: () => getCustomerData(),
   });
   const SORT_CUSTOMER_BY = ["total spent", "orders count", "last order date"];

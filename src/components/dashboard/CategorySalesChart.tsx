@@ -21,7 +21,7 @@ const CHART_COLORS = [
 
 export function CategorySalesChart() {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["category sales"],
+    queryKey: ["orders", "category-sales"],
     queryFn: () => getCategorySalesData(),
   });
 
