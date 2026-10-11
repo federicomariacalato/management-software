@@ -15,6 +15,7 @@ import {
 import { buttonVariants } from "../ui/button";
 import { formatOrderId } from "@/utils/orderId";
 import { Label } from "../ui/label";
+import { IdBadge } from "../shared/IdBadge";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateOrderStatus } from "@/services/orderServices";
 import {
@@ -108,9 +109,7 @@ export function OrderTableRow({ order, variant }: OrderTableRowProps) {
                   >
                     <div className="flex flex-col gap-1">
                       <div className="flex items-center gap-2">
-                        <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-mono text-xs font-medium text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400">
-                          #{o.productId}
-                        </span>
+                        <IdBadge>#{o.productId}</IdBadge>
                         <span className="font-medium">{o.productName}</span>
                       </div>
                       <span className="text-xs text-muted-foreground">

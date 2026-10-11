@@ -34,6 +34,7 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { Eye } from "lucide-react";
 import { formatOrderId } from "@/utils/orderId";
+import { IdBadge } from "@/components/shared/IdBadge";
 
 export default function Customers() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -192,9 +193,7 @@ export default function Customers() {
                           >
                             <div className="flex flex-col gap-1">
                               <div className="flex items-center gap-2">
-                                <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-mono text-xs font-medium text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400">
-                                  {formatOrderId(order.id)}
-                                </span>
+                                <IdBadge>{formatOrderId(order.id)}</IdBadge>
                                 <Badge
                                   className={getStatusClassName(
                                     order.orderStatus,
