@@ -8,10 +8,7 @@ export async function getProducts(): Promise<Product[]> {
     .order("category", { ascending: true })
     .order("name", { ascending: true });
 
-  if (error)
-    throw new Error(
-      "Si è verificato un problema nel recupero del catalogo, riprova",
-    );
+  if (error) throw new Error("Couldn't load products. Please try again.");
 
   return data;
 }
@@ -27,12 +24,32 @@ export async function updateProductAvailability(
     .select();
 
   if (error) {
-    throw new Error(
-      "Si è verificato un errore nella modifica della disponibilità",
-    );
+    throw new Error("Couldn't update product availability. Please try again.");
   }
 
   if (data.length === 0) {
-    throw new Error("Prodotto non trovato o permessi insufficienti");
+    throw new Error("Product not found or insufficient permissions.");
+  }
+}
+
+export async function deleteProduct(productId: number): Promise<void> {
+  const { data, error } = await supabase
+    .from("products")
+    .delete()
+    .eq("id", productId)
+    .select();
+
+  if (error?.code === "23503") {
+    throw new Error(
+      "This product appears in existing orders and can't be deleted. Mark it as out of stock instead.",
+    );
+  }
+
+  if (error) {
+    throw new Error("Couldn't delete the product. Please try again.");
+  }
+
+  if (data.length === 0) {
+    throw new Error("Product not found or insufficient permissions.");
   }
 }

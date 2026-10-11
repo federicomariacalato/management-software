@@ -3,10 +3,25 @@ import { TableRow, TableCell } from "../ui/table";
 import { Badge } from "../ui/badge";
 import { formatCurrency } from "@/utils/currency";
 import { IdBadge } from "../shared/IdBadge";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, Trash2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateProductAvailability } from "@/services/productServices";
+import {
+  deleteProduct,
+  updateProductAvailability,
+} from "@/services/productServices";
 import { Switch } from "../ui/switch";
+import { buttonVariants } from "../ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
 
 type ProductTableRowProps = {
   product: Product;
@@ -14,9 +29,15 @@ type ProductTableRowProps = {
 
 export function ProductTableRow({ product }: ProductTableRowProps) {
   const queryClient = useQueryClient();
-  const mutation = useMutation({
+  const availableMutation = useMutation({
     mutationFn: (isAvailable: boolean) =>
       updateProductAvailability(product.id, isAvailable),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+  const deleteMutation = useMutation({
+    mutationFn: (id: number) => deleteProduct(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
@@ -56,17 +77,51 @@ export function ProductTableRow({ product }: ProductTableRowProps) {
               aria-label={`Toggle availability of ${product.name}`}
               checked={product.is_available}
               onCheckedChange={(isAvailable) => {
-                mutation.mutate(isAvailable);
+                availableMutation.mutate(isAvailable);
               }}
-              disabled={mutation.isPending}
+              disabled={availableMutation.isPending}
             />
           </div>
         </div>
-        {mutation.error && (
+        {availableMutation.error && (
           <p className="mt-1.5 text-xs text-destructive">
-            {mutation.error.message}
+            {availableMutation.error.message}
           </p>
         )}
+      </TableCell>
+      <TableCell className="text-right">
+        <AlertDialog>
+          <AlertDialogTrigger
+            aria-label={`Delete ${product.name}`}
+            className={buttonVariants({ variant: "ghost", size: "icon" })}
+          >
+            <Trash2 className="text-destructive" />
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete this product?</AlertDialogTitle>
+              <AlertDialogDescription>
+                "{product.name}" will be permanently removed from the catalog.
+                This action can't be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            {deleteMutation.error && (
+              <p className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                {deleteMutation.error.message}
+              </p>
+            )}
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                variant="destructive"
+                onClick={() => deleteMutation.mutate(product.id)}
+                disabled={deleteMutation.isPending}
+              >
+                {deleteMutation.isPending ? "Deleting..." : "Delete"}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </TableCell>
     </TableRow>
   );

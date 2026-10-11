@@ -22,6 +22,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
             <TableHead>Category</TableHead>
             <TableHead className="text-right">Price</TableHead>
             <TableHead className="text-right">Availability</TableHead>
+            <TableHead className="text-right">Delete</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
