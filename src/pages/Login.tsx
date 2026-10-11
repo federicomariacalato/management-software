@@ -17,8 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const loginFormSchema = z.object({
-  email: z.string().email("Inserisci un’email valida"),
-  password: z.string().min(6, "La password deve avere almeno 6 caratteri"),
+  email: z.string().email("Enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
@@ -47,19 +47,19 @@ export default function Login() {
       });
 
       if (error) {
-        throw new Error("Questo account non ha accesso al gestionale");
+        throw new Error("Invalid email or password");
       }
 
       if (data.user.app_metadata.role !== "admin") {
         await supabase.auth.signOut();
-        throw new Error("Accesso non consentito");
+        throw new Error("This account doesn't have access to the dashboard");
       }
       navigate("/");
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
       } else {
-        setErrorMessage("Si è verificato un errore imprevisto");
+        setErrorMessage("Something went wrong. Please try again.");
       }
     } finally {
       setIsSubmitting(false);
@@ -71,9 +71,7 @@ export default function Login() {
       <div className="w-full max-w-sm space-y-6">
         <div className="text-center space-y-1">
           <h1 className="text-2xl font-bold">Ecommerce Admin</h1>
-          <p className="text-sm text-muted-foreground">
-            Area riservata all'amministratore
-          </p>
+          <p className="text-sm text-muted-foreground">Admin access only</p>
         </div>
 
         {errorMessage && (
@@ -85,7 +83,7 @@ export default function Login() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Accedi</CardTitle>
+            <CardTitle>Sign in</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={loginForm.handleSubmit(onLoginSubmit)}>
@@ -133,7 +131,7 @@ export default function Login() {
                   disabled={isSubmitting}
                   className="w-full"
                 >
-                  {isSubmitting ? "Accesso in corso..." : "Accedi"}
+                  {isSubmitting ? "Signing in..." : "Sign in"}
                 </Button>
               </FieldGroup>
             </form>

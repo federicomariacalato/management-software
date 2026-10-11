@@ -8,10 +8,7 @@ export async function getOrderData(): Promise<OrderData[]> {
     .select("*, order_items(*, products(category))")
     .order("created_at", { ascending: false });
 
-  if (error)
-    throw new Error(
-      "Si è verificato un problema nel recupero degli ordini, riprova",
-    );
+  if (error) throw new Error("Couldn't load orders. Please try again.");
 
   const orderData = data.map((order) => ({
     id: order.id,
@@ -47,10 +44,10 @@ export async function updateOrderStatus(
     .select();
 
   if (error) {
-    throw new Error("Si è verificato un errore nella modifica dello stato");
+    throw new Error("Couldn't update the order status. Please try again.");
   }
 
   if (data.length === 0) {
-    throw new Error("Ordine non trovato o permessi insufficienti");
+    throw new Error("Order not found or insufficient permissions.");
   }
 }

@@ -13,7 +13,7 @@ export function DashboardLayout() {
   if (isLoading)
     return (
       <div className="min-h-screen flex items-center justify-center text-sm text-muted-foreground">
-        Caricamento...
+        Loading...
       </div>
     );
 
@@ -25,13 +25,13 @@ export function DashboardLayout() {
         <div className="w-full max-w-sm rounded-xl border bg-background p-6 text-center space-y-4 shadow-sm">
           <ShieldAlert className="mx-auto h-10 w-10 text-destructive" />
           <div className="space-y-1">
-            <h1 className="text-lg font-semibold">Accesso non consentito</h1>
+            <h1 className="text-lg font-semibold">Access denied</h1>
             <p className="text-sm text-muted-foreground">
-              Questo account non ha accesso al gestionale.
+              This account doesn't have access to the dashboard.
             </p>
           </div>
           <Button className="w-full" onClick={() => supabase.auth.signOut()}>
-            Esci
+            Sign out
           </Button>
         </div>
       </div>

@@ -25,7 +25,7 @@ export function Header({ email }: HeaderProps) {
           onClick={() => supabase.auth.signOut()}
         >
           <LogOut />
-          Esci
+          Sign out
         </Button>
       </div>
     </header>
