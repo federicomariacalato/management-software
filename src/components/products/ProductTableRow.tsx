@@ -37,7 +37,7 @@ export function ProductTableRow({ product }: ProductTableRowProps) {
     },
   });
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => deleteProduct(id),
+    mutationFn: () => deleteProduct(product),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
@@ -114,7 +114,7 @@ export function ProductTableRow({ product }: ProductTableRowProps) {
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 variant="destructive"
-                onClick={() => deleteMutation.mutate(product.id)}
+                onClick={() => deleteMutation.mutate()}
                 disabled={deleteMutation.isPending}
               >
                 {deleteMutation.isPending ? "Deleting..." : "Delete"}

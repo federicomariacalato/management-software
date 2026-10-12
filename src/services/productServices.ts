@@ -32,11 +32,13 @@ export async function updateProductAvailability(
   }
 }
 
-export async function deleteProduct(productId: number): Promise<void> {
+const PRODUCT_IMAGES_BUCKET_PATH = "/storage/v1/object/public/product-images/";
+
+export async function deleteProduct(product: Product): Promise<void> {
   const { data, error } = await supabase
     .from("products")
     .delete()
-    .eq("id", productId)
+    .eq("id", product.id)
     .select();
 
   if (error?.code === "23503") {
@@ -51,6 +53,17 @@ export async function deleteProduct(productId: number): Promise<void> {
 
   if (data.length === 0) {
     throw new Error("Product not found or insufficient permissions.");
+  }
+
+  // Remove the image from Storage, if it was uploaded there. The original
+  // catalog images live in the storefront's public folder and are left alone.
+  // The product is already deleted, so a failed cleanup is not reported.
+  const imagePathIndex = product.image.indexOf(PRODUCT_IMAGES_BUCKET_PATH);
+  if (imagePathIndex !== -1) {
+    const imagePath = product.image.slice(
+      imagePathIndex + PRODUCT_IMAGES_BUCKET_PATH.length,
+    );
+    await supabase.storage.from("product-images").remove([imagePath]);
   }
 }
 
