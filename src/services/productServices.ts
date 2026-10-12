@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
-import type { Product } from "@/types/product.types";
+import type { NewProduct, Product } from "@/types/product.types";
 
 export async function getProducts(): Promise<Product[]> {
   const { data, error } = await supabase
@@ -51,5 +51,32 @@ export async function deleteProduct(productId: number): Promise<void> {
 
   if (data.length === 0) {
     throw new Error("Product not found or insufficient permissions.");
+  }
+}
+
+export async function createProduct(
+  product: NewProduct,
+  imageFile: File,
+): Promise<void> {
+  const extension = imageFile.name.split(".").at(-1)?.toLowerCase();
+  const path = `${crypto.randomUUID()}.${extension}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("product-images")
+    .upload(path, imageFile);
+
+  if (uploadError) throw new Error("Unable to upload the product image");
+
+  const { data: imageData } = supabase.storage
+    .from("product-images")
+    .getPublicUrl(path);
+
+  const { error } = await supabase
+    .from("products")
+    .insert({ ...product, image: imageData.publicUrl });
+
+  if (error) {
+    await supabase.storage.from("product-images").remove([path]);
+    throw new Error("Unable to add product");
   }
 }
