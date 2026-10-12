@@ -46,9 +46,17 @@ export function ProductTableRow({ product }: ProductTableRowProps) {
   return (
     <TableRow>
       <TableCell>
-        <div className="flex items-center gap-2">
-          <IdBadge>#{product.id}</IdBadge>
-          <span className="font-medium">{product.name}</span>
+        <div className="flex items-center gap-3">
+          <img
+            src={product.image}
+            alt=""
+            loading="lazy"
+            className="h-11 w-11 shrink-0 rounded-md border bg-muted object-cover"
+          />
+          <div className="flex flex-col items-start gap-1">
+            <span className="font-medium">{product.name}</span>
+            <IdBadge>#{product.id}</IdBadge>
+          </div>
         </div>
       </TableCell>
       <TableCell className="text-muted-foreground">
