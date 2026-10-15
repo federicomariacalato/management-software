@@ -11,7 +11,12 @@ function daysAgo(dateStr: string, todayUTCDays: number): number {
   return todayUTCDays - toUTCDays(dateStr);
 }
 
-type PeriodStats = { revenue: number; count: number; avgOrderValue: number };
+type PeriodStats = {
+  revenue: number;
+  count: number;
+  avgOrderValue: number;
+  activeCustomers: number;
+};
 
 function periodStats(
   orders: OrderData[],
@@ -25,7 +30,13 @@ function periodStats(
   });
   const revenue = inPeriod.reduce((total, order) => total + order.totalAmount, 0);
   const count = inPeriod.length;
-  return { revenue, count, avgOrderValue: count > 0 ? revenue / count : 0 };
+  const activeCustomers = new Set(inPeriod.map((order) => order.email)).size;
+  return {
+    revenue,
+    count,
+    avgOrderValue: count > 0 ? revenue / count : 0,
+    activeCustomers,
+  };
 }
 
 function percentChange(current: number, previous: number): number {
@@ -70,10 +81,10 @@ export function buildKpiData(orders: OrderData[]): KpiData[] {
       trend: weeklyTrend("avgOrderValue"),
     },
     {
-      label: "Conversion Rate (30d)",
-      value: "3,2%",
-      change: 0.6,
-      trend: [3.0, 3.1, 2.9, 3.2, 3.1, 3.2],
+      label: "Active Customers (30d)",
+      value: String(current.activeCustomers),
+      change: percentChange(current.activeCustomers, previous.activeCustomers),
+      trend: weeklyTrend("activeCustomers"),
     },
   ];
 }
