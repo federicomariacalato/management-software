@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
   Label,
+  type LabelProps,
 } from "recharts";
 
 const CHART_COLORS = [
@@ -57,7 +58,8 @@ export function CategorySalesChart() {
                 outerRadius={100}
               >
                 <Label
-                  content={({ viewBox }: any) => {
+                  content={({ viewBox }: LabelProps) => {
+                    if (!viewBox || !("cx" in viewBox)) return null;
                     const { cx, cy } = viewBox;
                     return (
                       <text x={cx} y={cy} textAnchor="middle">
