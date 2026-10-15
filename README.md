@@ -4,12 +4,18 @@ A React + TypeScript admin dashboard for managing an ecommerce store — orders,
 
 Built as a portfolio project to practice frontend architecture, state management, and data visualization with a modern React stack.
 
-**Live demo:** [management-software-three.vercel.app](https://management-software-three.vercel.app)
+**Live demo:** [management-software-three.vercel.app](https://management-software-three.vercel.app) — click **Try the demo** on the login page to explore it with sample data.
 
 ## Features
 
 **Authentication**
-- Admin-only login with Supabase Auth: the admin role lives in `app_metadata`, and Row Level Security policies restrict what the dashboard can read and write
+- Login with Supabase Auth for two roles stored in `app_metadata`: **admin** (full access) and **demo** (read-only); any other account is signed out
+- Row Level Security policies restrict what each role can read and write
+
+**Public demo**
+- One-click demo login with a dedicated account that owns ~150 sample orders, so visitors never see real customers' orders
+- Editing controls are disabled in demo mode, and a badge in the header says so
+- The demo password is public by design, so protection lives in the database: the demo role can't edit data, place orders, or change its own password or email (restrictive RLS policies and a trigger on `auth.users`)
 
 **Dashboard**
 - KPI cards (revenue, orders, average order value, active customers) computed live from order data over a rolling 30-day window, with sparkline trends
@@ -50,11 +56,11 @@ Built as a portfolio project to practice frontend architecture, state management
 
 ```bash
 npm install
-cp .env.example .env.local   # then fill in your Supabase URL and publishable key
+cp .env.example .env.local   # then fill in your Supabase URL, publishable key and demo credentials
 npm run dev
 ```
 
-The app runs at `http://localhost:5173`.
+The app runs at `http://localhost:5173`. The **Try the demo** button only appears when `VITE_DEMO_EMAIL` and `VITE_DEMO_PASSWORD` are set.
 
 Dashboard metrics and customer summaries are derived from the orders at runtime rather than pre-computed, so they stay consistent with the current date and with each other.
 
