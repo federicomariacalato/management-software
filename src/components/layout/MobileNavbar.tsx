@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { navItems } from "./Sidebar";
+import { navItems } from "./navItems";
 
 export function MobileNavbar() {
   return (
