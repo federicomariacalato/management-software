@@ -16,6 +16,7 @@ import { buttonVariants } from "../ui/button";
 import { formatOrderId } from "@/utils/orderId";
 import { Label } from "../ui/label";
 import { IdBadge } from "../shared/IdBadge";
+import { DEMO_DISABLED_HINT, useDemoMode } from "@/hooks/useDemoMode";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateOrderStatus } from "@/services/orderServices";
 import {
@@ -32,6 +33,7 @@ type OrderTableRowProps = {
 };
 
 export function OrderTableRow({ order, variant }: OrderTableRowProps) {
+  const isDemo = useDemoMode();
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (newStatus: OrderStatus) =>
@@ -70,9 +72,13 @@ export function OrderTableRow({ order, variant }: OrderTableRowProps) {
                   onValueChange={(status) => {
                     if (status) mutation.mutate(status);
                   }}
-                  disabled={mutation.isPending}
+                  disabled={isDemo || mutation.isPending}
                 >
-                  <SelectTrigger id={`status-${order.id}`} className="w-full">
+                  <SelectTrigger
+                    id={`status-${order.id}`}
+                    className="w-full"
+                    title={isDemo ? DEMO_DISABLED_HINT : undefined}
+                  >
                     <SelectValue placeholder="Status" />
                   </SelectTrigger>
                   <SelectContent>
@@ -83,6 +89,11 @@ export function OrderTableRow({ order, variant }: OrderTableRowProps) {
                     ))}
                   </SelectContent>
                 </Select>
+                {isDemo && (
+                  <span className="text-xs text-muted-foreground">
+                    {DEMO_DISABLED_HINT}
+                  </span>
+                )}
                 {mutation.isPending && !mutation.isPaused && (
                   <span className="text-xs text-muted-foreground">
                     Saving...

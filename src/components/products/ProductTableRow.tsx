@@ -4,6 +4,7 @@ import { Badge } from "../ui/badge";
 import { formatCurrency } from "@/utils/currency";
 import { IdBadge } from "../shared/IdBadge";
 import { RefreshCw, Trash2 } from "lucide-react";
+import { DEMO_DISABLED_HINT, useDemoMode } from "@/hooks/useDemoMode";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   deleteProduct,
@@ -28,6 +29,7 @@ type ProductTableRowProps = {
 };
 
 export function ProductTableRow({ product }: ProductTableRowProps) {
+  const isDemo = useDemoMode();
   const queryClient = useQueryClient();
   const availableMutation = useMutation({
     mutationFn: (isAvailable: boolean) =>
@@ -76,7 +78,10 @@ export function ProductTableRow({ product }: ProductTableRowProps) {
               Out of stock
             </Badge>
           )}
-          <div className="flex items-center gap-1.5 rounded-full border bg-muted/40 px-2 py-1">
+          <div
+            className="flex items-center gap-1.5 rounded-full border bg-muted/40 px-2 py-1"
+            title={isDemo ? DEMO_DISABLED_HINT : undefined}
+          >
             <RefreshCw
               className={`h-3.5 w-3.5 ${product.is_available ? "text-primary" : "text-muted-foreground"}`}
               aria-hidden="true"
@@ -87,7 +92,7 @@ export function ProductTableRow({ product }: ProductTableRowProps) {
               onCheckedChange={(isAvailable) => {
                 availableMutation.mutate(isAvailable);
               }}
-              disabled={availableMutation.isPending}
+              disabled={isDemo || availableMutation.isPending}
             />
           </div>
         </div>
@@ -101,6 +106,8 @@ export function ProductTableRow({ product }: ProductTableRowProps) {
         <AlertDialog>
           <AlertDialogTrigger
             aria-label={`Delete ${product.name}`}
+            disabled={isDemo}
+            title={isDemo ? DEMO_DISABLED_HINT : undefined}
             className={buttonVariants({ variant: "ghost", size: "icon" })}
           >
             <Trash2 className="text-destructive" />

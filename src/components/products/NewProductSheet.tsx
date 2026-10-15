@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { DEMO_DISABLED_HINT, useDemoMode } from "@/hooks/useDemoMode";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ImagePlus, Plus } from "lucide-react";
 import { createProduct } from "@/services/productServices";
@@ -49,6 +50,7 @@ type NewProductSheetProps = {
 };
 
 export function NewProductSheet({ categories }: NewProductSheetProps) {
+  const isDemo = useDemoMode();
   const [open, setOpen] = useState(false);
   const [isNewCategory, setIsNewCategory] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -139,7 +141,11 @@ export function NewProductSheet({ categories }: NewProductSheetProps) {
         if (!isOpen) resetAll();
       }}
     >
-      <SheetTrigger className={buttonVariants({ size: "sm" })}>
+      <SheetTrigger
+        className={buttonVariants({ size: "sm" })}
+        disabled={isDemo}
+        title={isDemo ? DEMO_DISABLED_HINT : undefined}
+      >
         <Plus />
         New product
       </SheetTrigger>

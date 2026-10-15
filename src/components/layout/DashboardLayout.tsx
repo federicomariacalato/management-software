@@ -3,6 +3,7 @@ import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 import { MobileNavbar } from "./MobileNavbar";
 import { useAuth } from "@/hooks/useAuth";
+import type { DashboardOutletContext } from "@/hooks/useDemoMode";
 import { Button } from "../ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { ShieldAlert } from "lucide-react";
@@ -43,7 +44,7 @@ export function DashboardLayout() {
         <div className="flex-1 flex flex-col min-w-0">
           <Header email={session.user.email} isDemo={isDemo} />
           <main className="flex-1 min-w-0 p-6 pb-20 md:pb-6">
-            <Outlet />
+            <Outlet context={{ isDemo } satisfies DashboardOutletContext} />
           </main>
         </div>
       </div>
