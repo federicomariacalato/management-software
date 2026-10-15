@@ -12,7 +12,7 @@ Built as a portfolio project to practice frontend architecture, state management
 - Admin-only login with Supabase Auth: the admin role lives in `app_metadata`, and Row Level Security policies restrict what the dashboard can read and write
 
 **Dashboard**
-- KPI cards (revenue, orders, average order value) computed live from order data over a rolling 30-day window, with sparkline trends
+- KPI cards (revenue, orders, average order value, active customers) computed live from order data over a rolling 30-day window, with sparkline trends
 - Sales performance bar chart (rolling 12 months) and category breakdown donut chart
 - Recent orders widget
 
@@ -78,7 +78,7 @@ The dashboard uses the same Supabase project as the companion [Terre d'Oliva sto
 - [x] Connect to a real backend, shared with a companion ecommerce storefront project
 - [x] Products page
 - [x] Unit tests for the dashboard data builders
-- [ ] Code cleanup and 404 page
+- [x] Code cleanup and 404 page
 
 ## Project structure
 
