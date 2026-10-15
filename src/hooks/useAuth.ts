@@ -1,11 +1,14 @@
 import { supabase } from "@/lib/supabaseClient";
 import type { Session } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
+import { canAccessDashboard, isAdminUser, isDemoUser } from "@/lib/roles";
 
 export function useAuth() {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const isAdmin = session?.user.app_metadata.role === "admin";
+  const isAdmin = isAdminUser(session?.user);
+  const isDemo = isDemoUser(session?.user);
+  const hasDashboardAccess = canAccessDashboard(session?.user);
 
   useEffect(() => {
     const {
@@ -17,5 +20,5 @@ export function useAuth() {
     return () => subscription.unsubscribe();
   }, []);
 
-  return { session, isLoading, isAdmin };
+  return { session, isLoading, isAdmin, isDemo, hasDashboardAccess };
 }
