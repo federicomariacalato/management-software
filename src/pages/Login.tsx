@@ -15,6 +15,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { canAccessDashboard } from "@/lib/roles";
 
 const loginFormSchema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -22,6 +23,12 @@ const loginFormSchema = z.object({
 });
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
+
+// The demo credentials are public on purpose: the demo user is read-only in
+// the database and its changes stay in the browser's query cache.
+const DEMO_EMAIL = import.meta.env.VITE_DEMO_EMAIL;
+const DEMO_PASSWORD = import.meta.env.VITE_DEMO_PASSWORD;
+const isDemoAvailable = Boolean(DEMO_EMAIL && DEMO_PASSWORD);
 
 export default function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,21 +43,21 @@ export default function Login() {
     },
   });
 
-  const onLoginSubmit = async (loginData: LoginFormValues) => {
+  const signIn = async (email: string, password: string) => {
     try {
       setErrorMessage(null);
       setIsSubmitting(true);
 
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: loginData.email,
-        password: loginData.password,
+        email,
+        password,
       });
 
       if (error) {
         throw new Error("Invalid email or password");
       }
 
-      if (data.user.app_metadata.role !== "admin") {
+      if (!canAccessDashboard(data.user)) {
         await supabase.auth.signOut();
         throw new Error("This account doesn't have access to the dashboard");
       }
@@ -66,12 +73,21 @@ export default function Login() {
     }
   };
 
+  const onLoginSubmit = (loginData: LoginFormValues) =>
+    signIn(loginData.email, loginData.password);
+
+  const onDemoClick = () => signIn(DEMO_EMAIL, DEMO_PASSWORD);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-muted/40 px-4">
       <div className="w-full max-w-sm space-y-6">
         <div className="text-center space-y-1">
           <h1 className="text-2xl font-bold">Ecommerce Admin</h1>
-          <p className="text-sm text-muted-foreground">Admin access only</p>
+          <p className="text-sm text-muted-foreground">
+            {isDemoAvailable
+              ? "Sign in as admin or try the demo"
+              : "Admin access only"}
+          </p>
         </div>
 
         {errorMessage && (
@@ -135,6 +151,28 @@ export default function Login() {
                 </Button>
               </FieldGroup>
             </form>
+
+            {isDemoAvailable && (
+              <div className="mt-6 space-y-3">
+                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <span className="h-px flex-1 bg-border" />
+                  or
+                  <span className="h-px flex-1 bg-border" />
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  disabled={isSubmitting}
+                  onClick={onDemoClick}
+                  className="w-full"
+                >
+                  Try the demo
+                </Button>
+                <p className="text-center text-xs text-muted-foreground">
+                  Explore with sample data. Changes aren't saved.
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
